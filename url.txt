@@ -6,3 +6,6 @@ http://stackoverflow.com/questions/26794334/spring-boot-mvc-template-not-loading
 
 3. install spark job server
 http://nishutayaltech.blogspot.com/2016/05/how-to-run-spark-job-server-and-spark.html
+
+4. d3.js
+https://dzone.com/articles/getting-started-d3js

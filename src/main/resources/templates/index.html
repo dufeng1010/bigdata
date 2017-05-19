@@ -2,9 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>D3.js</title>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 </head>
 <body>
 Hello, bigdata
+<div id="content">
+    <script>
+        d3.select("#content")
+            .selectAll('h1')
+            .data(['hello', 'world', 'big', 'data'])
+            .enter()
+            .append("h1")
+            .text(function(name) {return 'Hello ' + name + '!' });
+    </script>
+</div>
 </body>
 </html>
