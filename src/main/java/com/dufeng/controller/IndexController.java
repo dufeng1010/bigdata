@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +19,6 @@ import com.bluebreezecf.tools.sparkjobserver.api.SparkJobServerClientException;
 import com.bluebreezecf.tools.sparkjobserver.api.SparkJobServerClientFactory;
 
 @Controller
-@EnableAutoConfiguration
 public class IndexController {
 
     ISparkJobServerClient client = null;
@@ -89,9 +86,5 @@ public class IndexController {
             e.printStackTrace();
         }
         return "Hello, World";
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(IndexController.class, args);
     }
 }
