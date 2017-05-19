@@ -1,0 +1,8 @@
+1. spark job server client 
+https://github.com/bluebreezecf/SparkJobServerClient
+
+2. issue question
+http://stackoverflow.com/questions/26794334/spring-boot-mvc-template-not-loading-404-not-found
+
+3. install spark job server
+http://nishutayaltech.blogspot.com/2016/05/how-to-run-spark-job-server-and-spark.html

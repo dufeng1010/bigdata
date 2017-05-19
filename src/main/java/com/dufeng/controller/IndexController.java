@@ -25,65 +25,67 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index() {
-       /* try {
+        try {
             client = SparkJobServerClientFactory.getInstance().createSparkJobServerClient("http://hadoop255:8090");
 
             //GET /jars
-            List<SparkJobJarInfo> jarInfos = client.getJars();
+            /*List<SparkJobJarInfo> jarInfos = client.getJars();
             for(SparkJobJarInfo jarInfo : jarInfos) {
                 System.out.println(jarInfo);
-            }
+            }*/
 
             //POST /jars/<appName>
-            client.uploadSparkJobJar(new File("/home/yandufeng/Desktop/spark-test.jar"), "spark-test");
+            //client.uploadSparkJobJar(new File("/home/yandufeng/Desktop/spark-test.jar"), "spark-test");
 
             //GET /contexts
-            List<String> contexts = client.getContexts();
+            /*List<String> contexts = client.getContexts();
             for(String cxt : contexts) {
                 System.out.println(cxt);
-            }
+            }*/
 
             //POST /contexts/<name> -- Create context with name ctxTest and null parameter
-            client.createContext("ctxTest", null);
+            //client.createContext("ctxTest", null);
 
             //POST /contexts/<name> -- Create context with parameters
-            Map<String, String> params = new HashMap<String, String>();
+            /*Map<String, String> params = new HashMap<String, String>();
             params.put(ISparkJobServerClientConstants.PARAM_MEM_PER_NODE, "512m");
             params.put(ISparkJobServerClientConstants.PARAM_NUM_CPU_CORES, "10");
-            client.createContext("ctxTest2", params);
+            client.createContext("ctxTest2", params);*/
 
             //DELETE /contexts/<name>
-            client.deleteContext("ctxTest");
+            //client.deleteContext("ctxTest");
 
             //GET /jobs
-            List<SparkJobInfo> jobInfos = client.getJobs();
+            /*List<SparkJobInfo> jobInfos = client.getJobs();
             for(SparkJobInfo jobInfo : jobInfos) {
                 System.out.println(jobInfo);
-            }
+            }*/
 
             //POST /jobs --- Create a new job
-            params.put(ISparkJobServerClientConstants.PARAM_APP_NAME, "spark-test");
+            Map<String, String> params = new HashMap<String, String>();
+            params.put(ISparkJobServerClientConstants.PARAM_APP_NAME, "test");
             params.put(ISparkJobServerClientConstants.PARAM_CLASS_PATH, "spark.jobserver.WordCountExample");
+            params.put(ISparkJobServerClientConstants.PARAM_SYNC, "true");
             //1.start a spark job asynchronously and just get the status information
-            SparkJobResult result = client.startJob("input.string= fdsafd dfsf blullkfdsoflaw fsdfs", params);
+            SparkJobResult result = client.startJob("input.string= a a a b b c ddd", params);
             System.out.println(result);
 
             //2.start a spark job synchronously and wait until the result
-            params.put(ISparkJobServerClientConstants.PARAM_CONTEXT, "cxtTest2");
+           /* params.put(ISparkJobServerClientConstants.PARAM_CONTEXT, "cxtTest2");
             params.put(ISparkJobServerClientConstants.PARAM_SYNC, "true");
             result = client.startJob("input.string= fdsafd dfsf blullkfdsoflaw fsdffdsfsfs", params);
-            System.out.println(result);
+            System.out.println(result);*/
             
             //GET /jobs/<jobId>---Gets the result or status of a specific job
-            result = client.getJobResult("fdsfsfdfwfef");
-            System.out.println(result);
+           /* result = client.getJobResult("fdsfsfdfwfef");
+            System.out.println(result);*/
             
             //GET /jobs/<jobId>/config - Gets the job configuration
-            SparkJobConfig jobConfig = client.getConfig("fdsfsfdfwfef");
-            System.out.println(jobConfig);
+            /*SparkJobConfig jobConfig = client.getConfig("fdsfsfdfwfef");
+            System.out.println(jobConfig);*/
         } catch (SparkJobServerClientException e) {
             e.printStackTrace();
-        }*/
+        }
         return "index";
     }
 }
