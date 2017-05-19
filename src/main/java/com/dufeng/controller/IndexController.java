@@ -24,9 +24,8 @@ public class IndexController {
     ISparkJobServerClient client = null;
 
     @RequestMapping("/")
-    @ResponseBody
-    String index() {
-        try {
+    public String index() {
+       /* try {
             client = SparkJobServerClientFactory.getInstance().createSparkJobServerClient("http://hadoop255:8090");
 
             //GET /jars
@@ -84,7 +83,7 @@ public class IndexController {
             System.out.println(jobConfig);
         } catch (SparkJobServerClientException e) {
             e.printStackTrace();
-        }
-        return "Hello, World";
+        }*/
+        return "index";
     }
 }
