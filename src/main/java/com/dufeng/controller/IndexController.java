@@ -22,6 +22,11 @@ import com.bluebreezecf.tools.sparkjobserver.api.SparkJobServerClientFactory;
 public class IndexController {
 
     ISparkJobServerClient client = null;
+    
+    @RequestMapping("/home")
+    public String home() {
+        return "home";
+    }
 
     @RequestMapping("/")
     public String index() {
