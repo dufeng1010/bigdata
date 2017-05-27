@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <title>D3.js</title>
 <script src="http://d3js.org/d3.v4.min.js"></script>
-
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <style>
     .legend {
         font-size: 12px;
@@ -49,6 +49,16 @@
 </head>
 <body>
 <h1>Test D3.js</h1>
+
+<div>
+    <form id="execute" method="post">
+        <input type="text" id="sql" name="sql">
+        <input type="submit" id="submitButton" name="submitButton" value="执行">
+    </form>
+    
+    <div id="result">
+    </div>
+</div>
 <div id="chart">
     <script>
         /*
@@ -213,6 +223,23 @@
         }); */
         
             
+    </script>
+    
+    <script type='text/javascript'>
+        $("#execute").submit(function(event) {
+            event.preventDefault();
+            
+            var posting = $.post('/sparkjobserver', {sql : $("#sql").val()})
+            
+            posting.done(function(data) {
+                console.log(data);
+                data = $.parseJSON(data);
+                $.each(data, function(index, value) {
+                   console.log(index);
+                   console.log(value)
+                });
+            });
+        });
     </script>
 </div>
 </body>

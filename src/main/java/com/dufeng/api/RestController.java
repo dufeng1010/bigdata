@@ -17,19 +17,6 @@ public class RestController {
 
     @RequestMapping("/orderChannels")
     public List<OrderChannel> getOrderChannel() {
-        /*List<OrderChannel> list = new ArrayList<OrderChannel>();
-        
-        OrderChannel o1 = new OrderChannel();
-        o1.setLabel("wechat");
-        o1.setCount(2);
-        
-        OrderChannel o2 = new OrderChannel();
-        o2.setLabel("app");
-        o2.setCount(5);
-        
-        list.add(o1);
-        list.add(o2);*/
-        
         List<OrderChannel> list = restService.getOrderChannels();
         
         return list;
