@@ -30,4 +30,9 @@ public class IndexController {
     public String index() {
         return "index";
     }
+    
+    @RequestMapping("/echarts")
+    public String echarts() {
+        return "echarts";
+    }
 }

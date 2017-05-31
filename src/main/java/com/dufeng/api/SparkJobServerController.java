@@ -1,5 +1,6 @@
 package com.dufeng.api;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.bluebreezecf.tools.sparkjobserver.api.SparkJobResult;
 import com.bluebreezecf.tools.sparkjobserver.api.SparkJobServerClientException;
 import com.bluebreezecf.tools.sparkjobserver.api.SparkJobServerClientFactory;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 @org.springframework.web.bind.annotation.RestController
 public class SparkJobServerController {
@@ -85,7 +87,23 @@ public class SparkJobServerController {
             /*String str = result.getResult().substring(1);
             List<String> list = regex(str);*/
             
-            return result.getResult();
+            System.out.println(result.getResult());
+            
+            Type listType = new TypeToken<List<String>>() {}.getType();
+            List<String> list = new Gson().fromJson(result.getResult(), listType);
+            
+            StringBuilder categories = new StringBuilder().append("[");
+            StringBuilder orders = new StringBuilder().append("[");
+            for(String s : list) {
+                List<String> orderStat = new Gson().fromJson(s, listType);
+                categories.append("\"" + orderStat.get(0) + "\",");
+                orders.append("\"" + orderStat.get(1) + "\",");
+            }
+            
+            String c = categories.substring(0, categories.length() - 1) + "]";
+            String o = orders.substring(0, orders.length() - 1) + "]";
+            
+            return "{\"categories\": " + c + ", \"data\": " + o + "}";
         } catch (SparkJobServerClientException e) {
             e.printStackTrace();
         }
@@ -106,7 +124,10 @@ public class SparkJobServerController {
         List<String> list=new ArrayList<String>();  
         Pattern p = Pattern.compile("(\\[[^\\]]*\\])");  
         Matcher m = p.matcher(str);  
-        while(m.find()){  
+        while(m.find()){
+            if (m.group().substring(1, m.group().length()-1).contains("null")) {
+                break;
+            }
             list.add(m.group().substring(1, m.group().length()-1));  
         }  
         return list;  
