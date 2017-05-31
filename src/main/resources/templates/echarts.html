@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Echarts</title>
+<script src="js/echarts.min.js"></script>
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 600px; height: 400px;"></div>
+    <div>
+        <form id="execute" method="post">
+            <input type="text" id="sql" name="sql">
+            <input type="submit" id="submitButton" name="submitButton" value="执行">
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        var myChart = echarts.init(document.getElementById("main"));
+        
+        var option = {
+                title: {
+                    text: 'ECharts 入门示例'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['销量']
+                },
+                xAxis: {
+                    data: ["wechat", "app", "pc", "wap"]
+                },
+                yAxis: {},
+                series: [{
+                    name: "销量",
+                    type: "bar",
+                    data: ["5", "10", "6", "9"]
+                }]
+        }
+        
+        myChart.setOption(option);
+        
+        $("#execute").submit(function(event) {
+            event.preventDefault();
+                $.get('/sparkjobserver', {sql : $("#sql").val()}).done(function(data) {
+                    data = $.parseJSON(data);
+                    console.log(data.categories);
+                    console.log(data.data);
+                    myChart.setOption({
+                        xAxis: {
+                            data: data.categories
+                        },
+                        series: [{
+                            name: '销量',
+                            data: data.data
+                        }]
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
